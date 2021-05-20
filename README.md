@@ -128,6 +128,8 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libdeepmd-green.svg)](https://anaconda.org/deepmodeling/libdeepmd) | [![Conda Downloads](https://img.shields.io/conda/dn/deepmodeling/libdeepmd.svg)](https://anaconda.org/deepmodeling/libdeepmd) | [![Conda Version](https://img.shields.io/conda/vn/deepmodeling/libdeepmd.svg)](https://anaconda.org/deepmodeling/libdeepmd) | [![Conda Platforms](https://img.shields.io/conda/pn/deepmodeling/libdeepmd.svg)](https://anaconda.org/deepmodeling/libdeepmd) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libdeepmd--base-green.svg)](https://anaconda.org/deepmodeling/libdeepmd-base) | [![Conda Downloads](https://img.shields.io/conda/dn/deepmodeling/libdeepmd-base.svg)](https://anaconda.org/deepmodeling/libdeepmd-base) | [![Conda Version](https://img.shields.io/conda/vn/deepmodeling/libdeepmd-base.svg)](https://anaconda.org/deepmodeling/libdeepmd-base) | [![Conda Platforms](https://img.shields.io/conda/pn/deepmodeling/libdeepmd-base.svg)](https://anaconda.org/deepmodeling/libdeepmd-base) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libdeepmd--devel-green.svg)](https://anaconda.org/deepmodeling/libdeepmd-devel) | [![Conda Downloads](https://img.shields.io/conda/dn/deepmodeling/libdeepmd-devel.svg)](https://anaconda.org/deepmodeling/libdeepmd-devel) | [![Conda Version](https://img.shields.io/conda/vn/deepmodeling/libdeepmd-devel.svg)](https://anaconda.org/deepmodeling/libdeepmd-devel) | [![Conda Platforms](https://img.shields.io/conda/pn/deepmodeling/libdeepmd-devel.svg)](https://anaconda.org/deepmodeling/libdeepmd-devel) |
 
 Installing libdeepmd
 ====================
@@ -139,10 +141,10 @@ conda config --add channels deepmodeling
 conda config --set channel_priority strict
 ```
 
-Once the `deepmodeling` channel has been enabled, `libdeepmd` can be installed with:
+Once the `deepmodeling` channel has been enabled, `libdeepmd, libdeepmd-base, libdeepmd-devel` can be installed with:
 
 ```
-conda install libdeepmd
+conda install libdeepmd libdeepmd-base libdeepmd-devel
 ```
 
 It is possible to list all of the versions of `libdeepmd` available on your platform with:
