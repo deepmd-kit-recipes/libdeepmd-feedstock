@@ -1,5 +1,5 @@
 {% set name = "libdeepmd" %}
-{% set version = "2.0.0.a1" %}
+{% set version = "2.0.0.b0" %}
 {% if cuda_compiler_version == "None" %}
 {% set dp_variant = "cpu" %}
 {% else %}
@@ -41,9 +41,6 @@ build:
   number: 0
   string: "{{ PKG_BUILDNUM }}_cuda{{ cuda_compiler_version }}_{{ dp_variant }}"  # [float_prec == 'high']
   string: "{{ PKG_BUILDNUM }}_cuda{{ cuda_compiler_version }}_{{ dp_variant }}_{{float_prec}}"  # [float_prec != 'high']
-  run_exports:
-    - libdeepmd {{ version }} *{{ dp_variant }}  # [float_prec == 'high']
-    - libdeepmd {{ version }} *{{ dp_variant }}_{{ float_prec }}  # [float_prec != 'high']
   skip: true  # [not linux]
 
 requirements:
@@ -55,15 +52,40 @@ requirements:
   host:
     - cudatoolkit {{ cuda_compiler_version }}*  # [cuda_compiler_version != 'None']
     - cudnn {{ cudnn }}*  # [cuda_compiler_version != 'None']
-    - libtensorflow_cc {{ tf }}*
+    - libtensorflow_cc
   run:
-    - libtensorflow_cc {{ tf }}*
-    - {{ pin_compatible('cudatoolkit', max_pin='x.x') }}  # [cuda_compiler_version != 'None']
-    - {{ pin_compatible('cudnn') }}  # [cuda_compiler_version != 'None']
+    - {{ pin_subpackage("libdeepmd-base", exact=True) }} 
+    - {{ pin_subpackage("libdeepmd-devel", exact=True) }} 
 
-test:
-  commands:
-    - ldd $PREFIX/bin/dp_ipi
+outputs:
+  - name: libdeepmd-base
+    files:
+      - bin/*
+      - lib/*
+    build:
+      string: "{{ PKG_BUILDNUM }}_cuda{{ cuda_compiler_version }}_{{ dp_variant }}"  # [float_prec == 'high']
+      string: "{{ PKG_BUILDNUM }}_cuda{{ cuda_compiler_version }}_{{ dp_variant }}_{{float_prec}}"  # [float_prec != 'high']
+    requirements:
+      host:
+        - cudatoolkit {{ cuda_compiler_version }}*  # [cuda_compiler_version != 'None']
+        - cudnn {{ cudnn }}*  # [cuda_compiler_version != 'None']
+      run:
+        - libtensorflow_cc {{ tf }}*
+        - {{ pin_compatible('cudatoolkit', max_pin='x.x') }}  # [cuda_compiler_version != 'None']
+        - {{ pin_compatible('cudnn') }}  # [cuda_compiler_version != 'None']
+    run_export:
+      - libdeepmd-base {{ version }} *{{ dp_variant }}  # [float_prec == 'high']
+      - libdeepmd-base {{ version }} *{{ dp_variant }}_{{ float_prec }}  # [float_prec != 'high']
+    test:
+      commands:
+        - ldd $PREFIX/bin/dp_ipi
+
+  - name: libdeepmd-devel
+    build:
+      noarch: generic
+    files:
+      - include/*
+      - share/*
 
 about:
   home: https://github.com/deepmodeling/deepmd-kit
