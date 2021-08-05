@@ -9,15 +9,15 @@ channel_sources:
 channel_targets:
 - deepmodeling dev
 cuda_compiler_version:
-- '10.2'
+- None
 cudnn:
-- '8'
+- undefined
 cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '7'
 docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 target_platform:
 - linux-ppc64le
 zip_keys:
@@ -26,3 +26,4 @@ zip_keys:
 - - cudnn
   - cuda_compiler_version
   - cdt_name
+  - docker_image
